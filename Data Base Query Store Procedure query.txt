@@ -1,0 +1,47 @@
+Data Base Name =>   EmployeeDataBase
+
+
+DCREATE TABLE [dbo].[Employees] (
+    [Id]      INT           IDENTITY (1, 1) NOT NULL,
+    [Name]    VARCHAR (150) NOT NULL,
+    [City]    VARCHAR (80)  NOT NULL,
+    [Address] VARCHAR (150) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+CREATE PROCEDURE [dbo].[AddEmployee]
+	@Name varchar(150),
+	@City varchar(80),
+	@Address varchar(150)
+AS
+BEGIN
+	INSERT INTO Employees VALUES(@Name,@City,@Address);
+END
+CREATE PROCEDURE [dbo].[DeleteEmployee]
+	@Id int
+AS
+BEGIN
+	DELETE FROM Employees WHERE Id=@Id;
+END
+
+CREATE PROCEDURE [dbo].[EditEmployee]
+     @Id int,
+	@Name varchar(150),
+	@City varchar(80),
+	@Address varchar(150)
+AS
+BEGIN
+	UPDATE Employees SET Name=@Name,City=@City,Address=@Address WHERE Id=@Id;
+END
+
+CREATE PROCEDURE [dbo].[GetAllEmployees]
+AS
+BEGIN
+	SELECT * FROM Employees;
+END
+
+CREATE PROCEDURE [dbo].[GetEmployee]
+	@Id int
+AS
+BEGIN
+	SELECT * FROM Employees WHERE Id=@Id;
+END
